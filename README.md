@@ -20,6 +20,7 @@ In the apls browser, browse and choose .DAT file.
 
 
 Choose all licenses and clicked download.
+
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/c01cfa89-03f0-4ed1-af76-9f8b1368da61)
 
 Now run the SLM_UI_installer (Linux or Windows, I choose Wins). It will open a web. The requirement:
@@ -39,15 +40,23 @@ Then enable ssh: `sudo apt install openssh-server`, `sudo systemctl enable ssh`,
 and configure for ssh for root for the Ubun vm following the link: https://linuxconfig.org/allow-ssh-root-login-on-ubuntu-20-04-focal-fossa-linux
 
 Now get the ip of the Ubun: 
+
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/629c60f6-72cd-480a-aaf9-7a9433db6aeb)
 
 Then fill in the SLM_UI_installer browser and click Run: 
+
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/3412a0cd-5dae-4ff4-bff4-5995e85a1665)
 
 Then click next. Summary:
+
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/80b92914-bc85-4b4a-98e9-7898c9144f8b)
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/17bf3df3-34ea-4783-8852-de77aae743f5)
 
 Then it open a web, default admin:admin 
+
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/880d41a0-b0fb-4367-bb55-c0783b2a419d)
+
+
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/2e0110c0-56ad-4c2c-8fca-d824d02eadcf)
+
 
