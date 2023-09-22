@@ -136,3 +136,5 @@ Run SWCI
 --capath=workspace/mnist/cert/ca/capath \
 -e http_proxy= -e https_proxy= --apls-ip=${APLS_IP}
 
+You can monitor the containers with SLM-UI:
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/a8b916ff-c484-4db6-8cf4-f4edaa66661b)
