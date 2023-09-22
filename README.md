@@ -59,4 +59,80 @@ Then it open a web, default admin:admin
 
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/2e0110c0-56ad-4c2c-8fca-d824d02eadcf)
 
+Mở port cho fw trên vm apls: 
+	firewall-cmd --zone=public --add-port=5814/tcp --permanent
+	firewall-cmd --reload
+
+APLS_IP=172.30.31.2 \
+SN_1_IP=192.168.120.235  \
+HOST_1_IP=192.168.120.235  \
+SN_API_PORT=30304 \
+SN_P2P_PORT=30303
+
+
+sed -i "s+<PROJECT-MODEL>+$(pwd)/workspace/mnist/model+g" workspace/mnist/swci/taskdefs/swarm_mnist_task.yaml
+
+
+sed -i "s+<SWARM-NETWORK>+host-1-net+g" workspace/mnist/swop/swop1_profile.yaml
+
+
+sed -i "s+<HOST_ADDRESS>+${HOST_1_IP}+g" workspace/mnist/swop/swop1_profile.yaml
+
+
+
+
+sed -i "s+<LICENSE-SERVER-ADDRESS>+${APLS_IP}+g" workspace/mnist/swop/swop1_profile.yaml
+
+
+
+sed -i "s+<PROJECT>+$(pwd)/workspace/mnist+g" workspace/mnist/swop/swop1_profile.yaml
+
+
+
+sed -i "s+<PROJECT-CERTS>+$(pwd)/workspace/mnist/cert+g" workspace/mnist/swop/swop1_profile.yaml
+
+
+
+sed -i "s+<PROJECT-CACERTS>+$(pwd)/workspace/mnist/cert/ca/capath+g" workspace/mnist/swop/swop1_profile.yaml
+
+create a Docker volume and copy Swarm Learning wheel file:
+docker volume rm sl-cli-lib
+docker volume create sl-cli-lib
+docker container create --name helper -v sl-cli-lib:/data hello-world
+docker cp -L lib/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl helper:/data
+docker rm helper
+
+ On host-1, run SN node (SN1):
+./scripts/bin/run-sn -d --name=sn1 \
+--network=host-1-net --host-ip=${HOST_1_IP} \
+--sentinel --sn-p2p-port=${SN_P2P_PORT} \
+--sn-api-port=${SN_API_PORT} \
+--key=workspace/mnist/cert/sn-1-key.pem \
+--cert=workspace/mnist/cert/sn-1-cert.pem \
+--capath=workspace/mnist/cert/ca/capath \
+--apls-ip=${APLS_IP}
+
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/e5b5b800-8032-44a9-bd55-d0bd8708f19f)
+
+docker logs -f <sn-container-id>. Wait until `swarm.blCnt : INFO : Starting SWARM-API-SERVER on port: 30304` show up:
+
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/4dcc1aa6-81a8-4c73-95b6-cecaad8751e8)
+
+
+Run SWOP:
+./scripts/bin/run-swop -d --name=swop1 --network=host-1-net \
+--sn-ip=${SN_1_IP} --sn-api-port=${SN_API_PORT} \
+--usr-dir=workspace/mnist/swop --profile-file-name=swop1_profile.yaml \
+--key=workspace/mnist/cert/swop-1-key.pem \
+--cert=workspace/mnist/cert/swop-1-cert.pem \
+--capath=workspace/mnist/cert/ca/capath -e http_proxy= -e https_proxy= \
+--apls-ip=${APLS_IP}
+
+Run SWCI
+./scripts/bin/run-swci --name=swci1 --network=host-1-net \
+--usr-dir=workspace/mnist/swci --init-script-name=swci-init \
+--key=workspace/mnist/cert/swci-1-key.pem \
+--cert=workspace/mnist/cert/swci-1-cert.pem \
+--capath=workspace/mnist/cert/ca/capath \
+-e http_proxy= -e https_proxy= --apls-ip=${APLS_IP}
 
