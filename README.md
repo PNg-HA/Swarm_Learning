@@ -125,7 +125,7 @@ Run SWOP:
 --usr-dir=workspace/mnist/swop --profile-file-name=swop1_profile.yaml \
 --key=workspace/mnist/cert/swop-1-key.pem \
 --cert=workspace/mnist/cert/swop-1-cert.pem \
---capath=workspace/mnist/cert/ca/capath -e http_proxy= -e https_proxy= \
+--capath=workspace/mnist/cert/ca/capath -e SWOP_KEEP_CONTAINERS=True -e http_proxy= -e https_proxy= \
 --apls-ip=${APLS_IP}
 
 Run SWCI
