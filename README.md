@@ -69,6 +69,10 @@ HOST_1_IP=192.168.120.235  \
 SN_API_PORT=30304 \
 SN_P2P_PORT=30303
 
+mkdir workspace; cp -r examples/mnist workspace/; cp -r examples/utils/gen-cert workspace/mnist/
+
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/5338c280-8800-428f-9787-895a817ffc31)
+
 
 sed -i "s+<PROJECT-MODEL>+$(pwd)/workspace/mnist/model+g" workspace/mnist/swci/taskdefs/swarm_mnist_task.yaml; sed -i "s+<SWARM-NETWORK>+host-1-net+g" workspace/mnist/swop/swop1_profile.yaml; sed -i "s+<HOST_ADDRESS>+${HOST_1_IP}+g" workspace/mnist/swop/swop1_profile.yaml; sed -i "s+<LICENSE-SERVER-ADDRESS>+${APLS_IP}+g" workspace/mnist/swop/swop1_profile.yaml; sed -i "s+<PROJECT>+$(pwd)/workspace/mnist+g" workspace/mnist/swop/swop1_profile.yaml; sed -i "s+<PROJECT-CERTS>+$(pwd)/workspace/mnist/cert+g" workspace/mnist/swop/swop1_profile.yaml; sed -i "s+<PROJECT-CACERTS>+$(pwd)/workspace/mnist/cert/ca/capath+g" workspace/mnist/swop/swop1_profile.yaml
 
