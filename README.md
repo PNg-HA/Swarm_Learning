@@ -59,9 +59,10 @@ Then it open a web, default admin:admin
 
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/2e0110c0-56ad-4c2c-8fca-d824d02eadcf)
 
-Mở port cho fw trên vm apls: 
+Mở port cho fw trên vm apls (centos): 
 	firewall-cmd --zone=public --add-port=5814/tcp --permanent
 	firewall-cmd --reload
+Mở port cho fw trên vps: sudo ufw allow <port>
 
 APLS_IP=172.30.31.2 \
 SN_1_IP=192.168.120.235  \
