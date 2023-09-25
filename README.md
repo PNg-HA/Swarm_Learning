@@ -104,7 +104,7 @@ docker cp -L lib/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl helper:
 docker rm helper
 
  On host-1, run SN node (SN1):
-./scripts/bin/run-sn -d --rm --name=sn1 \
+sudo ./scripts/bin/run-sn -d --rm --name=sn1 \
 --network=host-1-net --host-ip=${HOST_1_IP} \
 --sentinel --sn-p2p-port=${SN_P2P_PORT} \
 --sn-api-port=${SN_API_PORT} \
@@ -121,7 +121,7 @@ docker logs -f <sn-container-id>. Wait until `swarm.blCnt : INFO : Starting SWAR
 
 
 Run SWOP:
-./scripts/bin/run-swop -d --rm --name=swop1 --network=host-1-net \
+sudo ./scripts/bin/run-swop -d --rm --name=swop1 --network=host-1-net \
 --sn-ip=${SN_1_IP} --sn-api-port=${SN_API_PORT} \
 --usr-dir=workspace/mnist/swop --profile-file-name=swop1_profile.yaml \
 --key=workspace/mnist/cert/swop-1-key.pem \
@@ -130,7 +130,7 @@ Run SWOP:
 --apls-ip=${APLS_IP}
 
 Run SWCI
-./scripts/bin/run-swci --name=swci1 --network=host-1-net \
+sudo ./scripts/bin/run-swci --name=swci1 --network=host-1-net \
 --usr-dir=workspace/mnist/swci --init-script-name=swci-init \
 --key=workspace/mnist/cert/swci-1-key.pem \
 --cert=workspace/mnist/cert/swci-1-cert.pem \
