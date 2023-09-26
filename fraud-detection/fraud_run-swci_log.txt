@@ -1,0 +1,171 @@
+Successfully copied 2.05kB to b4d6468733418bccac2c2b6483e60fd49ca214a8b86dae04827b0ce8aa8a2a20:/tmp/container_info_file
+b4d6468733418bccac2c2b6483e60fd49ca214a8b86dae04827b0ce8aa8a2a20
+######################################################################
+##                   HPE SWARM LEARNING SWCI NODE                   ##
+######################################################################
+## © Copyright 2021-2023 Hewlett Packard Enterprise Development LP  ##
+######################################################################
+SWCI:0 > ######################################################################
+SWCI:0 > # (C)Copyright 2021-2023 Hewlett Packard Enterprise Development LP
+SWCI:0 > ######################################################################
+SWCI:0 >
+SWCI:0 > # Assumption : SWOP is already running
+SWCI:0 >
+SWCI:0 > # SWCI context setup
+SWCI:0 > EXIT ON FAILURE
+SWCI:0 > EXIT ON FAILURE IS TURNED ON
+SWCI:1 > wait for ip sn1
+    API Server is UP!
+SWCI:2 > create context test-fd with ip sn1
+    API Server is UP!
+    CONTEXT CREATED : test-fd
+/usr/lib/python3.8/site-packages/urllib3/connection.py:455: SubjectAltNameWarning: Certificate for sn1 has no `subjectAltName`, falling back to check for a `commonName` for now. This feature is being removed by major browsers and deprecated by RFC 2818. (See https://github.com/urllib3/urllib3/issues/497 for details.)
+  warnings.warn(
+SWCI:3 > switch context test-fd
+    DEFAULT CONTEXT SET TO : test-fd
+SWCI:4 > EXIT ON FAILURE OFF
+SWCI:4 > EXIT ON FAILURE IS TURNED OFF
+SWCI:5 >
+SWCI:5 > #Change to the directory where we are mounting the host
+SWCI:5 > cd /platform/swarm/usr
+SWCI:5 > Current Directory : /platform/swarm/usr
+SWCI:6 >
+SWCI:6 > # Create and finalize build task
+SWCI:6 > EXIT ON FAILURE
+SWCI:6 > EXIT ON FAILURE IS TURNED ON
+SWCI:7 > create task from taskdefs/user_env_tf_build_task.yaml
+    Task definition is valid
+    Task Registered : user_env_tf_build_task
+    Appending Task Body
+    batch start : 1 , len : 4 Successful
+    batch start : 5 , len : 4 Successful
+    batch start : 9 , len : 3 Successful
+    Task creation Successful
+    WARNING: Task should be finalized by user explicitly
+SWCI:8 > finalize task user_env_tf_build_task
+    Task Finalized
+SWCI:9 > get task info user_env_tf_build_task
+    NAME         : user_env_tf_build_task
+    TASKTYPE     : MAKE_USER_CONTAINER
+    CREATETIME   : 2023-09-26 15:19:58
+    AUTHOR       : HPESwarm
+    CONTENTLINES : 12
+    PREREQ       : ROOTTASK
+    OUTCOME      : user-env-tf2.7.0-swop
+    FINALIZED    : True
+SWCI:10 > get task body user_env_tf_build_task
+    0000: ---
+    0001: BuildContext : sl-cli-lib
+    0002: BuildSteps   :
+    0003:     - FROM tensorflow/tensorflow:2.7.0
+    0004:     -
+    0005:     - RUN pip3 install --upgrade pip && pip3 install \
+    0006:     -    keras matplotlib opencv-python pandas protobuf==3.15.6
+    0007:     -
+    0008:     - RUN mkdir -p /tmp/hpe-swarmcli-pkg
+    0009:     - COPY swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl /tmp/hpe-swarmcli-pkg/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl
+    0010:     - RUN pip3 install /tmp/hpe-swarmcli-pkg/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl
+    0011: BuildType : INLINE
+SWCI:11 > list tasks
+    ROOTTASK
+    user_env_tf_build_task
+SWCI:12 > EXIT ON FAILURE OFF
+SWCI:12 > EXIT ON FAILURE IS TURNED OFF
+SWCI:13 >
+SWCI:13 > # Assign build task to taskrunner
+SWCI:13 > EXIT ON FAILURE
+SWCI:13 > EXIT ON FAILURE IS TURNED ON
+SWCI:14 > RESET TASKRUNNER defaulttaskbb.taskdb.sml.hpe
+    TaskRunner Reset
+SWCI:15 > ASSIGN TASK user_env_tf_build_task TO defaulttaskbb.taskdb.sml.hpe WITH 1 PEERS
+    Task assigned to TaskRunner
+SWCI:16 > WAIT FOR TASKRUNNER defaulttaskbb.taskdb.sml.hpe
+    WAITING FOR TASKRUNNER TO COMPLETE - Maximum wait time is : 120 mins
+##################
+    TASKRUNNER FINISHED
+      STATE : COMPLETE
+      TIME  : 2023-09-26 15:21:46
+SWCI:17 > EXIT ON FAILURE OFF
+SWCI:17 > EXIT ON FAILURE IS TURNED OFF
+SWCI:18 >
+SWCI:18 > # Build task was already run. Now build and run swarm run tasks
+SWCI:18 >
+SWCI:18 > # Create and finalize swarm run task
+SWCI:18 > EXIT ON FAILURE
+SWCI:18 > EXIT ON FAILURE IS TURNED ON
+SWCI:19 > create task from taskdefs/swarm_fd_task.yaml
+    Task definition is valid
+    Task Registered : swarm_fd_task
+    Appending Task Body
+    batch start : 1 , len : 4 Successful
+    batch start : 5 , len : 4 Successful
+    batch start : 9 , len : 4 Successful
+    Task creation Successful
+    WARNING: Task should be finalized by user explicitly
+SWCI:20 > finalize task swarm_fd_task
+    Task Finalized
+SWCI:21 > get task info swarm_fd_task
+    NAME         : swarm_fd_task
+    TASKTYPE     : RUN_SWARM
+    CREATETIME   : 2023-09-26 15:21:51
+    AUTHOR       : HPESwarm
+    CONTENTLINES : 13
+    PREREQ       : user_env_tf_build_task
+    OUTCOME      : swarm_fd_task
+    FINALIZED    : True
+SWCI:22 > get task body swarm_fd_task
+    0000: ---
+    0001: Command : model/fraud-detection.py
+    0002: Entrypoint : python3
+    0003: WorkingDir : /tmp/test
+    0004: PrivateContent : /tmp/test/
+    0005: SharedContent :
+    0006:   - Src   : /opt/hpe/swarm-learning/workspace/fraud-detection/model
+    0007:     Tgt   : /tmp/test/model
+    0008:     MType : BIND
+    0009: Envvars :
+    0010:   - DATA_DIR : app-data
+    0011:   - MAX_EPOCHS : 32
+    0012:   - MIN_PEERS : 4
+SWCI:23 > list tasks
+    ROOTTASK
+    user_env_tf_build_task
+    swarm_fd_task
+SWCI:24 > EXIT ON FAILURE OFF
+SWCI:24 > EXIT ON FAILURE IS TURNED OFF
+SWCI:25 >
+SWCI:25 > # Assign run task
+SWCI:25 > EXIT ON FAILURE
+SWCI:25 > EXIT ON FAILURE IS TURNED ON
+SWCI:26 > RESET TASKRUNNER defaulttaskbb.taskdb.sml.hpe
+    TaskRunner Reset
+SWCI:27 > ASSIGN TASK swarm_fd_task TO defaulttaskbb.taskdb.sml.hpe WITH 4 PEERS
+    Task assigned to TaskRunner
+SWCI:28 > WAIT FOR TASKRUNNER defaulttaskbb.taskdb.sml.hpe
+    WAITING FOR TASKRUNNER TO COMPLETE - Maximum wait time is : 120 mins
+#####################################
+    TASKRUNNER FINISHED
+      STATE : COMPLETE
+      TIME  : 2023-09-26 15:25:15
+SWCI:29 > # Grace period for ML container to save the model,
+SWCI:29 > # before the below reset command cleans up the ML and SL Containers.
+SWCI:29 > SLEEP 15
+SWCI:29 > Completed SLEEP for: 15 secs
+SWCI:30 > RESET TASKRUNNER defaulttaskbb.taskdb.sml.hpe
+    TaskRunner Reset
+SWCI:31 > EXIT ON FAILURE OFF
+SWCI:31 > EXIT ON FAILURE IS TURNED OFF
+SWCI:32 >
+SWCI:32 > # List and reset training contract
+SWCI:32 > EXIT ON FAILURE
+SWCI:32 > EXIT ON FAILURE IS TURNED ON
+SWCI:33 > LIST CONTRACTS
+    defaultbb.cqdb.sml.hpe
+SWCI:34 > RESET CONTRACT defaultbb.cqdb.sml.hpe
+    Contract Reset
+SWCI:35 > EXIT ON FAILURE OFF
+SWCI:35 > EXIT ON FAILURE IS TURNED OFF
+SWCI:36 >
+SWCI:36 > # Exit
+SWCI:36 > EXIT
+SWCI:36 > EXITING
