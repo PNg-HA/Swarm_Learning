@@ -1,0 +1,28 @@
+APLS_IP=172.30.31.2
+HOST_IP=192.168.120.235
+SN_IP=192.168.120.235
+SN_API_PORT=30304
+
+sed -i "s+<PROJECT-MODEL>+$(pwd)/workspace/fraud-detection/model+g" workspace/fraud-detection/swci/taskdefs/swarm_fd_task.yaml
+sed -i "s+<SWARM-NETWORK>+host-1-net+g" workspace/fraud-detection/swop/swop*_profile.yaml
+sed -i "s+<CURRENT-PATH>/examples+$(pwd)/workspace+g" workspace/fraud-detection/swop/swop*_profile.yaml
+sed -i "s+<LICENSE-SERVER-ADDRESS>+${APLS_IP}+g" workspace/fraud-detection/swop/swop*_profile.yaml
+sed -i "s+<PROJECT-CERTS>+$(pwd)/workspace/fraud-detection/cert+g" workspace/fraud-detection/swop/swop*_profile.yaml
+sed -i "s+<PROJECT-CACERTS>+$(pwd)/workspace/fraud-detection/cert/ca/capath+g" workspace/fraud-detection/swop/swop*_profile.yaml
+
+
+./scripts/bin/run-sn -d --rm --name=sn1 --network=host-1-net --host-ip=${HOST_IP} \
+--sentinel --sn-api-port=${SN_API_PORT} \
+--key=workspace/fraud-detection/cert/sn-1-key.pem \
+--cert=workspace/fraud-detection/cert/sn-1-cert.pem \
+--capath=workspace/fraud-detection/cert/ca/capath \
+--apls-ip=${APLS_IP}
+
+
+./scripts/bin/run-swop -d --rm --name=swop1 --network=host-1-net \
+--usr-dir=workspace/fraud-detection/swop \
+--profile-file-name=swop1_profile.yaml --sn-ip=${SN_IP} --sn-api-port=${SN_API_PORT} \
+--key=workspace/fraud-detection/cert/swop-1-key.pem \
+--cert=workspace/fraud-detection/cert/swop-1-cert.pem \
+--capath=workspace/fraud-detection/cert/ca/capath \
+-e http_proxy= -e https_proxy= --apls-ip=${APLS_IP}
