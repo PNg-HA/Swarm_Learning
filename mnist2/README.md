@@ -1,179 +1,110 @@
-MNIST
-========
+# <d></d> <img style="float: right;" src="docs/images/GettyImages-1148109728_EAA-graphic-A_112_0_72_RGB.jpg?raw=true"/> SWARM LEARNING
 
-This example runs MNIST [1] on the Swarm Learning platform. It uses TensorFlow as the backend.
+#### Product version: 2.0.0
 
-The code for this example has been taken from [2] and modified to run on a Swarm Learning platform.
+Swarm Learning is a decentralized, privacy-preserving Machine Learning framework. This framework utilizes the computing power at, or near, the distributed data sources to run the Machine Learning algorithms that train the models. It uses the security of a blockchain platform to share learnings with peers in a safe and secure manner. In Swarm Learning, training of the model occurs at the edge, where data is most recent, and where prompt, data-driven decisions are mostly necessary. In this completely decentralized architecture, only the insights learned are shared with the collaborating ML peers, not the raw data. This tremendously enhances data security and privacy.
+<img width="70%" height="70%" src="/docs/User/GUID-E80D248E-E754-498E-99D6-67508092F779-high.png">
 
-This example uses one training batch and one test batch. The Machine Learning program, after conversion to Swarm Learning for the TensorFlow-based Keras platform, is in `examples/mnist/model`. The TensorFlow-based file is called `mnist_tf.py`.
+Swarm Learning framework is made up of various components known as nodes, such as Swarm Learning (SL) nodes, Swarm Network (SN) nodes, Swarm Learning Command Interface (SWCI) nodes, and Swarm Operator (SWOP) nodes. Each node of Swarm Learning is modularized and runs in a separate container. The **nodes represent different Swarm Learning _functionality_ and not physical server nodes**.
 
-This example shows the Swarm training of MNIST model using two Machine Learning (ML) nodes. Machine Learning nodes are automatically spawned by Swarm Operators (SWOP) nodes running on two different hosts. Swarm training is initiated by Swarm Command Interface (SWCI) node and orchestrated by two Swarm Network (SN) nodes running in different hosts. This example also shows how private data and shared model can be mounted to Machine Learning nodes for Swarm training. For details, see the profile files and task definition files placed under `examples/mnist/swop` and `examples/mnist/swci` folders respectively.
+-   SL nodes run the core of Swarm Learning. An SL node works in collaboration with all the other SL nodes in the network. It regularly shares its learnings with the other nodes and incorporates their insights. SL nodes act as an interface between the user model application and other Swarm Learning components. SL nodes take care of distributing and merging model weights in a secured way.
 
+-   SN nodes form the blockchain network. The current version of Swarm Learning uses an open-source version of Ethereum as the underlying blockchain platform. The SN nodes interact with each other using this blockchain platform to maintain and track progress. The SN nodes use this state and progress information to co-ordinate the working of the other swarm learning components.
 
+    **Sentinel Node** is a special SN node. The Sentinel node is responsible for initializing the blockchain network. This is the first node to start.
 
-## Cluster Setup
+<blockquote>
+    NOTE: Only metadata is written to the blockchain. The model itself is not stored in the blockchain.
+</blockquote>
 
-The cluster setup for this example uses 2 hosts, as shown in the figure below:  
-- host-1: 172.1.1.1  
-- host-2: 172.2.2.2  
+-   SWCI node is the command interface tool to the Swarm Learning framework. It is used to monitor the Swarm Learning framework. SWCI nodes can connect to any of the SN nodes in a given Swarm Learning framework to manage the framework. 
+For more information on SWCI, see [Swarm Learning Command Interface](./docs/User/Swarm_Learning_Command_Interface.md).
 
-|![mnist-cluster-setup](../figs/mnist-cluster-setup.png)|
-|:--:|
-|<b>Figure 1: Cluster setup for the MNIST example</b>|
+-   SWOP is an agent that can manage Swarm Learning operations. SWOP is responsible to execute tasks that are assigned to it. A SWOP node can execute only one task at a time. SWOP helps in executing tasks such as starting and stopping Swarm runs, building and upgrading ML containers, and sharing models for training. For more information about SWOP, see [Swarm Operator node \(SWOP\)](./docs/User/Swarm_Operator_node_(SWOP).md).
 
-1. This example uses two Swarm Network (SN) nodes. The names of the docker containers representing these two nodes are **sn1** and **sn2**. sn1 is the Sentinel Node. sn1 runs on host 172.1.1.1. sn2 runs on host 172.2.2.2.
-2. Swarm Learning (SL) and Machine Learning (ML) nodes are automatically spawned by Swarm Operators (SWOP) nodes during training and removed after training. Example uses two SWOP nodes – one connects to each SN node. The names of the docker containers representing these two SWOP nodes are **swop1** and **swop2**. swop1 runs on host 172.1.1.1. swop2 runs on host 172.2.2.2.
-3. Training is initiated by SWCI node (**swci1**) that runs on host 172.1.1.1
-4. Example assumes that License Server already runs on host 172.1.1.1. All Swarm nodes connect to the License Server, on its default port 5814.
+-   Swarm Learning security and digital identity aspects are handled by X.509 certificates. Communication among Swarm Learning components are secured using X.509 certificates. User can either generate their own certificates or directly use certificates generated by any Standard Security software such as SPIRE. For more information on SPIRE, see [https://thebottomturtle.io/Solving-the-bottom-turtle-SPIFFE-SPIRE-Book.pdf](https://thebottomturtle.io/Solving-the-bottom-turtle-SPIFFE-SPIRE-Book.pdf) and [https://spiffe.io/](https://spiffe.io/).
 
+<blockquote>
+    NOTE: Swarm Learning framework does not initialize if certificates are not provided.
+</blockquote>
 
+-   Swarm Learning components communicate with each other using a set of TCP/IP ports.
 
-## Running the MNIST example
+<blockquote>
+NOTE: The participating nodes must be able to access each other's ports.
+</blockquote>
 
-1. *On both host-1 and host-2*:  
-   cd to `swarm-learning` folder (i.e. parent to examples directory). 
-   
+For more information on port details that must be opened, see [Exposed Ports](/docs/Install/Exposed_port_numbers.md).
 
-2. *On both host-1 and host-2*:  
-   Create a temporary `workspace` directory and copy 	`mnist` example and `gen-cert` utility there.
-   ```
-   mkdir workspace
-   cp -r examples/mnist workspace/
-   cp -r examples/utils/gen-cert workspace/mnist/
-   ```
+-   License Server installs and manages the license that is required to run the Swarm Learning framework. The licenses are managed by the AutoPass License Server \(APLS\) that runs on a separate node. For more information, see [APLS User Guide](/docs/HPE%20AutoPass%20License%20Server%20User%20Guide.pdf).
 
-3. *On both host-1 and host-2*:  
-   Run the `gen-cert` utility to generate certificates for each Swarm component using the command: `gen-cert -e <EXAMPLE-NAME> -i <HOST-INDEX>`  
-   *On host-1*:  
-   ```
-   ./workspace/mnist/gen-cert -e mnist -i 1
-   ```  
-   *On host-2*:  
-   ```
-   ./workspace/mnist/gen-cert -e mnist -i 2
-   ```
+Swarm Learning nodes works in collaboration with other Swarm Learning nodes in the network. It regularly shares its learnings with the other nodes and incorporates their insights. This process continues until the Swarm Learning nodes train the model to desired state.
 
-4. *On both host-1 and host-2*:  
-   Share the CA certificates between the hosts as follows –  
-   *On host-1*:  
-   ```
-   scp host-2:<PATH>workspace/mnist/cert/ca/capath/ca-2-cert.pem workspace/mnist/cert/ca/capath
-   ```  
-   *On host-2*:  
-   ```
-   scp host-1:<PATH>workspace/mnist/cert/ca/capath/ca-1-cert.pem workspace/mnist/cert/ca/capath
-   ```
-   
-5. *On both host-1 and host-2*:  
-   Create a docker network for SN, SWOP, SWCI, SL and user containers running in a host  
-   *On host-1*:  
-   ```
-   docker network create host-1-net
-   ```  
-   *On host-2*:  
-   ```
-   docker network create host-2-net
-   ```
+## User ML components
 
-5. *On both host-1 and host-2*:  
-   Declare and assign values to the variables like APLS_IP, SN_IP, HOST_IP and SN_API_PORT. The values mentioned here are for understanding purpose only. Use appropriate values as per your swarm network.
-   
-    ```
-    APLS_IP=172.1.1.1
-    SN_1_IP=172.1.1.1
-    SN_2_IP=172.2.2.2
-    HOST_1_IP=172.1.1.1
-    HOST_2_IP=172.2.2.2
-    SN_API_PORT=30304
-    SN_P2P_PORT=30303
-    ```
+User can transform any Keras or PyTorch based ML program that is written using Python3 into a Swarm Learning ML program by [making a few simple changes](./docs/User/How_to_Swarm_enable_an_ML_algorithm.md) to the model training code by including the `SwarmCallback` API. For more information, see any of the [examples](/examples/README.md) included with the Swarm Learning package for a sample code.
 
-6. *On both host-1 and host-2*:  
-   Search and replace all occurrences of placeholders and replace them with appropriate values.
-   ```
-   sed -i "s+<PROJECT-MODEL>+$(pwd)/workspace/mnist/model+g" workspace/mnist/swci/taskdefs/swarm_mnist_task.yaml
-   sed -i "s+<SWARM-NETWORK>+host-1-net+g" workspace/mnist/swop/swop1_profile.yaml
-   sed -i "s+<SWARM-NETWORK>+host-2-net+g" workspace/mnist/swop/swop2_profile.yaml
-   sed -i "s+<HOST_ADDRESS>+${HOST_1_IP}+g" workspace/mnist/swop/swop1_profile.yaml
-   sed -i "s+<HOST_ADDRESS>+${HOST_2_IP}+g" workspace/mnist/swop/swop2_profile.yaml
-   sed -i "s+<LICENSE-SERVER-ADDRESS>+${APLS_IP}+g" workspace/mnist/swop/swop*_profile.yaml
-   sed -i "s+<PROJECT>+$(pwd)/workspace/mnist+g" workspace/mnist/swop/swop*_profile.yaml
-   sed -i "s+<PROJECT-CERTS>+$(pwd)/workspace/mnist/cert+g" workspace/mnist/swop/swop*_profile.yaml
-   sed -i "s+<PROJECT-CACERTS>+$(pwd)/workspace/mnist/cert/ca/capath+g" workspace/mnist/swop/swop*_profile.yaml
-   ```
-   Note: If the swarm installation directory is different for both the hosts then user need to manually modify the <PROJECT-MODEL> value from the swarm_mnist_task.yaml file to the path that is common to both the hosts.  
+The transformed user Machine Learning \(user ML node\) program can be run on the host or user can build it as a Docker container.
 
-7. *On both host-1 and host-2*:  
-   Create a docker volume and copy SwarmLearning wheel file there
-   ```
-   docker volume rm sl-cli-lib
-   docker volume create sl-cli-lib
-   docker container create --name helper -v sl-cli-lib:/data hello-world
-   docker cp -L lib/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl helper:/data
-   docker rm helper
-   ```
+<blockquote>
+NOTE: HPE recommends users to build an ML Docker container.
 
-8. *On host-1*:  
-   Run Swarm Network node (sn1) - sentinel node  
-   ```
-   ./scripts/bin/run-sn -d --rm --name=sn1 --network=host-1-net --host-ip=${HOST_1_IP} --sentinel --sn-p2p-port=${SN_P2P_PORT} --sn-api-port=${SN_API_PORT} \
-   --key=workspace/mnist/cert/sn-1-key.pem --cert=workspace/mnist/cert/sn-1-cert.pem --capath=workspace/mnist/cert/ca/capath --apls-ip=${APLS_IP}
-   ```
-   Use the docker logs command to monitor the Sentinel SN node and wait for the node to finish initializing. The Sentinel node is ready when these messages appear in the log output:  
-   `swarm.blCnt : INFO : Starting SWARM-API-SERVER on port: 30304`
+</blockquote>
 
-9. *On host-2*:  
-   Run Swarm Network node (sn2)  
-   ```
-   ./scripts/bin/run-sn -d --rm --name=sn2 --network=host-2-net --host-ip=${HOST_2_IP} --sentinel-ip=${SN_1_IP} --sn-p2p-port=${SN_P2P_PORT}                \
-   --sn-api-port=${SN_API_PORT} --key=workspace/mnist/cert/sn-2-key.pem --cert=workspace/mnist/cert/sn-2-cert.pem --capath=workspace/mnist/cert/ca/capath   \
-   --apls-ip=${APLS_IP}
-   ```
+The ML node is responsible to train and iteratively update the model. For each ML node, there is a corresponding SL node in the Swarm Learning framework, which performs the Swarm training. Each pair of ML and SL nodes must run on the same host. This process continues until the SL nodes train the model to the desired state.
 
-10.	*On host-1*:  
-    Run Swarm Operator node (swop1)  
-    
-    Note: If required, modify proxy, according to environment, either in the below command or in the swop profile files under `workspace/mnist/swop` folder.  
-   ```
-   ./scripts/bin/run-swop -d --rm --name=swop1 --network=host-1-net --sn-ip=${SN_1_IP} --sn-api-port=${SN_API_PORT}       \
-   --usr-dir=workspace/mnist/swop --profile-file-name=swop1_profile.yaml --key=workspace/mnist/cert/swop-1-key.pem        \
-   --cert=workspace/mnist/cert/swop-1-cert.pem --capath=workspace/mnist/cert/ca/capath -e http_proxy= -e https_proxy=     \
-   --apls-ip=${APLS_IP}
-   ```
+<blockquote>
+NOTE: All the ML nodes must use the same ML platform either Keras (based on TensorFlow 2 backend) or PyTorch. Using Keras for some of the nodes and PyTorch for the other nodes is not supported.
+</blockquote>
 
-11.	*On host-2*:  
-    Run Swarm Operator node (swop2)  
-    
-    Note: If required, modify proxy, according to environment, either in the below command or in the swop profile files under `workspace/mnist/swop` folder.
-   ```
-   ./scripts/bin/run-swop -d --rm --name=swop2 --network=host-2-net --sn-ip=${SN_2_IP} --sn-api-port=${SN_API_PORT}       \
-   --usr-dir=workspace/mnist/swop --profile-file-name=swop2_profile.yaml --key=workspace/mnist/cert/swop-2-key.pem        \
-   --cert=workspace/mnist/cert/swop-2-cert.pem --capath=workspace/mnist/cert/ca/capath -e http_proxy= -e https_proxy=     \
-   --apls-ip=${APLS_IP}
-   ```
+## Getting Started 
+  1. [Prerequisites](/docs/Install/Prerequisites.md) for Swarm Learning
+  2. [Upgrading from earlier evaluation versions](/docs/Install/Versioning_and_upgrade.md)
+  3. [Download and setup Swarm Learning](/docs/Install/HPE_Swarm_Learning_installation.md) using the SLM-UI installer 
+  4. Execute [MNIST example](/examples/mnist/README.md) 
+  5. [Frequently Asked Questions](/docs/User/Frequently_asked_questions.md)
+  6. [Troubleshooting](/docs/User/Troubleshooting.md)
 
-12.	*On host-1*:  
-    Run Swarm Command Interface node (swci1). It will create, finalize and assign below tasks to task-framework for sequential execution –  
-    - user_env_tf_build_task: Builds Tensorflow based docker image for ML node to run model training  
-    - swarm_mnist_task: Create containers out of ML image and mount model and data path to run Swarm training  
-    
-    Note: If required, modify IP, according to environment, in `workspace/mnist/swci/swci-init` file.  
-   ```
-   ./scripts/bin/run-swci --rm --name=swci1 --network=host-1-net --usr-dir=workspace/mnist/swci --init-script-name=swci-init       \
-   --key=workspace/mnist/cert/swci-1-key.pem --cert=workspace/mnist/cert/swci-1-cert.pem --capath=workspace/mnist/cert/ca/capath   \
-   -e http_proxy= -e https_proxy= --apls-ip=${APLS_IP}
-   ```
+<blockquote>
 
-13.	*On both host-1 and host-2*:  
-    Two node Swarm training is automatically started when the run task (swarm_mnist_task) gets assigned and executed. User can open a new terminal on both host-1 and host-2 and monitor the docker logs of ML nodes for Swarm training. Swarm training will end with the following log message at the end –  
-    `SwarmCallback : INFO : All peers and Swarm training rounds finished. Final Swarm model was loaded.`  
-    Final Swarm model will be saved inside \<PROJECT\> location which will likely be user's specific as `workspace/mnist/<userN>` directory on both the hosts. All the dynamically spawned SL and ML nodes will exit after Swarm training. The SN and SWOP nodes continue running.
+NOTE: **Accessing Hewlett Packard Enterprise Support** clause and **Concurrent swarm training** feature mentioned in the documentation are applicable for enterprise customers ONLY.
 
-14.	*On both host-1 and host-2*:  
-    To clean-up, run the `scripts/bin/stop-swarm` script on all the systems to stop and remove the container nodes of the previous run. If needed, take backup of the container logs. Finally remove docker networks (`host-1-net` and `host-2-net`) and docker volume (`sl-cli-lib`) and delete the `workspace` directory.
-        
+</blockquote>
 
+## Documentation
 
+  - [How Swarm Learning Components interact](/docs/User/Swarm_Learning_component_interactions.md)
+  - [Component interactions when using Reverse Proxy](/docs/User/Swarm_Learning_Component_Interactions_using_Reverse_Proxy.md)
+  - [Swarm Learning Concepts](/docs/User/Swarm_Learning_concepts.md)
+  - [Working of a Swarm Learning node](/docs/User/Working_of_a_Swarm_Learning_node.md)
+  - [Adapting ML programs for Swarm Learning](/docs/User/Adapting_an_ML_program_for_Swarm_Learning.md)
+  - [Swarm wheels package](/docs/User/Swarm_client_interface-wheels_package.md)
+  - [Configuring Swarm Learning components](/docs/Install/Configuring_Swarm_Learning.md) 
+  - [Using SWCI](/docs/User/Swarm_Learning_Command_Interface.md)
+  - [Using SWOP](/docs/User/Swarm_Operator_node_(SWOP).md)
+  - [Running Swarm learning examples using SLM-UI](/docs/Install/Running_Swarm_Learning_examples_using_SLM-UI.md)
+  - [Running Swarm Learning using CLI](/docs/Install/Running_Swarm_Learning_using_CLI.md)
+  - [Examples](/examples/README.md)
+  - [Swarm Learning Log Collection](/docs/User/Swarm_Log_Collector.md)
+  
 ## References
-[1]	Y. LeCun, C. Cortes and C. J. Burges, "THE MNIST DATABASE," [Online]. Available: [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)  
-[2] [https://www.tensorflow.org/tutorials/quickstart/beginner](https://www.tensorflow.org/tutorials/quickstart/beginner)
+
+  - [Papers](docs/Generic/papers-and-articles.md)
+  - [Videos](docs/Generic/videos.md)
+  - [URLs](docs/Generic/URL.md)
+
+## Acronyms and Abbreviations
+  Refer to [Acronyms and Abbreviations](docs/Generic/acronyms.md) for more information.
+
+## Getting in touch 
+  Feedback and questions are appreciated. You can use the issue tracker to report bugs on GitHub.  
+  or  
+  Join the [HPE Developer Slack Workspace](https://slack.hpedev.io/) and start a discussion in our [#hpe-swarm-learning](https://hpedev.slack.com/archives/C04A5DK9TUK) channel.
+  
+## Contributing
+  Refer to [Contributing](docs/Generic/CONTRIBUTING.md) for more information.
+
+## License
+  The distribution of Swarm Learning in this repository is for non-commercial and experimental use under this [license](docs/Generic/LICENSE.md). 
+  
+  See [ATTRIBUTIONS](docs/Generic/ATTRIBUTIONS.md) and [DATA LICENSE](docs/Generic/DATA_LICENSE.md) for terms and conditions for using the datasets included in this repository.
