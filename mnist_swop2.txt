@@ -1,0 +1,131 @@
+addgroup: The GID `0' is already in use.
+Adding group `docker' (GID 999) ...
+Done.
+adduser: The UID 0 is already in use.
+uid=0(root) gid=0(root) groups=0(root),999(docker)
+######################################################################
+##                   HPE SWARM LEARNING SWOP NODE                   ##
+######################################################################
+## © Copyright 2021-2023 Hewlett Packard Enterprise Development LP  ##
+######################################################################
+=========              EXECUTING AS USER : root              =========
+2023-09-29 14:05:12,807 : swarm.swop : INFO : Creating Autopass License Provider
+2023-09-29 14:05:14,512 : swarm.swop : INFO : Creating license server
+2023-09-29 14:05:14,517 : swarm.swop : INFO : Setting license servers
+2023-09-29 14:05:14,566 : swarm.swop : INFO : Acquiring floating license 1100000390:1
+2023-09-29 14:05:16,053 : swarm.swop : INFO :  Found Profile at : /platform/swarm/usr/swop2_profile.yaml 
+2023-09-29 14:05:16,063 : swarm.swop : INFO : SWOP Profile 
+============================================================
+apisrv:
+  locator:
+    host: 192.168.120.118
+    port: 30304
+    service: null
+apls:
+  locator:
+    host: 172.30.31.2
+    port: 5814
+envvars:
+- SL_LOG_LEVEL: INFO
+- http_proxy: null
+- https_proxy: null
+- no_proxy: null
+- HTTP_PROXY: null
+- HTTPS_PROXY: null
+- NO_PROXY: null
+groupname: demo
+network: host-2-net
+nodes:
+- slnodedef:
+    identity:
+    - attribute:
+        aType: KEY
+        mType: BIND
+        src: /opt/hpe/swarm-learning/workspace/mnist/cert/sl-2-key.pem
+        subPath: null
+        tgt: /swarm-cert/sl-2-key.pem
+    - attribute:
+        aType: CERT
+        mType: BIND
+        src: /opt/hpe/swarm-learning/workspace/mnist/cert/sl-2-cert.pem
+        subPath: null
+        tgt: /swarm-cert/sl-2-cert.pem
+    - attribute:
+        aType: CAPATH
+        mType: BIND
+        src: /opt/hpe/swarm-learning/workspace/mnist/cert/ca/capath
+        subPath: null
+        tgt: /swarm-cert/capath
+    idx: 0
+    privatedata:
+      mType: BIND
+      src: /opt/hpe/swarm-learning/workspace/mnist
+    slenvvars: null
+    slhostip: 192.168.120.118
+    slhostname: sl2
+    slport: 18000
+    usrenvvars:
+    - SCRATCH_DIR: user2
+    usrhostname: user2
+policyuri: null
+resourcemgr:
+  accessinfo:
+    accesstype: FROMENV
+  mgrtype: DOCKER
+taskrunner: defaulttaskbb.taskdb.sml.hpe
+
+============================================================
+
+2023-09-29 14:05:16,189 : swarm.swop : INFO : SL Nodes validation is started
+2023-09-29 14:05:16,189 : swarm.swop : INFO : Attempting to contact API-Server at : 192.168.120.118:30304
+2023-09-29 14:05:16,274 : swarm.swop : INFO : API-Server is UP!
+2023-09-29 14:05:16,310 : swarm.swop : INFO : SWOPCtx : 
+============================================================
+===== NODE UID :  a2646087-c9c7-4e41-a197-5fc64bf4c831 =====
+============================================================
+
+/usr/lib/python3.8/site-packages/urllib3/connection.py:460: SubjectAltNameWarning: Certificate for 192.168.120.118 has no `subjectAltName`, falling back to check for a `commonName` for now. This feature is being removed by major browsers and deprecated by RFC 2818. (See https://github.com/urllib3/urllib3/issues/497 for details.)
+  warnings.warn(
+2023-09-29 14:05:23,160 : swarm.swop : INFO : SWOPExecutor : Ready for Task Execution!
+2023-09-29 14:08:02,982 : swarm.swop : INFO : SWOPExecutor: ENROLL TO Task : user_env_tf_build_task , opId : 12210008173649295504 - Begins
+2023-09-29 14:08:06,059 : swarm.swop : INFO : SWOPExecutor: ENROLL TO Task : user_env_tf_build_task , opId : 12210008173649295504 - Ends
+2023-09-29 14:08:06,102 : swarm.swop : INFO : SWOPBuildTask: Validating profile
+2023-09-29 14:08:12,270 : swarm.swop : INFO : Extracted container id and image info from /tmp/container_info_file file
+2023-09-29 14:08:24,978 : swarm.swop : INFO : SWOPBuildTask: prerequisites OK
+2023-09-29 14:08:28,022 : swarm.swop : INFO : SWOPBuildTask: start build thread 
+
+2023-09-29 14:08:28,049 : swarm.swop : INFO : Step 1/5 : FROM tensorflow/tensorflow:2.7.0
+2023-09-29 14:08:28,050 : swarm.swop : INFO :  ---> b51f642475ab
+2023-09-29 14:08:28,050 : swarm.swop : INFO : Step 2/5 : RUN pip3 install --upgrade pip && pip3 install keras matplotlib opencv-python pandas protobuf==3.15.6
+2023-09-29 14:08:28,054 : swarm.swop : INFO :  ---> Using cache
+2023-09-29 14:08:28,054 : swarm.swop : INFO :  ---> 666c4f7a0e9b
+2023-09-29 14:08:28,054 : swarm.swop : INFO : Step 3/5 : RUN mkdir -p /tmp/hpe-swarmcli-pkg
+2023-09-29 14:08:28,055 : swarm.swop : INFO :  ---> Using cache
+2023-09-29 14:08:28,055 : swarm.swop : INFO :  ---> 522e717f8ca2
+2023-09-29 14:08:28,056 : swarm.swop : INFO : Step 4/5 : COPY swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl /tmp/hpe-swarmcli-pkg/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl
+2023-09-29 14:08:28,056 : swarm.swop : INFO :  ---> Using cache
+2023-09-29 14:08:28,056 : swarm.swop : INFO :  ---> 1143d306e549
+2023-09-29 14:08:28,057 : swarm.swop : INFO : Step 5/5 : RUN pip3 install /tmp/hpe-swarmcli-pkg/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl
+2023-09-29 14:08:28,057 : swarm.swop : INFO :  ---> Using cache
+2023-09-29 14:08:28,057 : swarm.swop : INFO :  ---> 69363642f272
+2023-09-29 14:08:28,058 : swarm.swop : INFO : ID: sha256:69363642f272223a7677d9fe040dbc808368cd3de26b305dddbc8331397d3c12
+2023-09-29 14:08:28,058 : swarm.swop : INFO : Successfully built 69363642f272
+2023-09-29 14:08:28,058 : swarm.swop : INFO : Successfully tagged user-env-tf2.7.0-swop:latest
+2023-09-29 14:08:36,069 : swarm.swop : INFO : SWOPBuildTask: build task completed
+2023-09-29 14:08:36,070 : swarm.swop : INFO : SWOPBuildTask: Stopping Task
+2023-09-29 14:08:39,131 : swarm.swop : INFO : SWOPExecutor: Total Tasks: 1 , Current Task : user_env_tf_build_task , opId : 12210008173649295504 Done
+2023-09-29 14:08:39,132 : swarm.swop : INFO : SWOPExecutor : Ready for Task Execution!
+2023-09-29 14:12:41,945 : swarm.swop : INFO : SWOPExecutor: ENROLL TO Task : swarm_mnist_task , opId : 11745205044202366838 - Begins
+2023-09-29 14:12:45,003 : swarm.swop : INFO : SWOPExecutor: ENROLL TO Task : swarm_mnist_task , opId : 11745205044202366838 - Ends
+2023-09-29 14:12:45,113 : swarm.swop : INFO : Extracted container id and image info from /tmp/container_info_file file
+2023-09-29 14:12:45,167 : swarm.swop : INFO : SWOPRunTask: Profile validated
+2023-09-29 14:12:48,225 : swarm.swop : INFO : SWOPRunTask: APLS configured with non-default port : 5814
+2023-09-29 14:12:48,226 : swarm.swop : INFO : SWOPRunTask: SL Image Name : hub.myenterpriselicense.hpe.com/hpe/swarm-learning/sl:2.0.0
+2023-09-29 14:12:48,306 : swarm.swop : INFO : SWOPRunTask: Arguments passed to User container idx : 0
+2023-09-29 14:12:48,306 : swarm.swop : INFO : {'entrypoint': 'python3', 'detach': True, 'auto_remove': False, 'name': 'demo-swarm_mnist_task-u-0-ce8c5e8ac844de71', 'hostname': 'user2', 'network': 'host-2-net', 'ports': {}, 'mounts': [{'Target': '/tmp/hpe-swarm', 'Source': 'swop-demo-swif-0-ce8c5e8ac844de71', 'Type': 'volume', 'ReadOnly': False}, {'Target': '/tmp/test/model', 'Source': '/opt/hpe/swarm-learning/workspace/mnist/model', 'Type': 'bind', 'ReadOnly': False}, {'Target': '/tmp/test/', 'Source': '/opt/hpe/swarm-learning/workspace/mnist', 'Type': 'bind', 'ReadOnly': False}], 'environment': {'MODEL_DIR': 'model', 'MAX_EPOCHS': 2, 'MIN_PEERS': 2, 'SCRATCH_DIR': 'user2', 'SL_REQUEST_CHANNEL': '/tmp/hpe-swarm/demo.0.ce8c5e8ac844de71.request.pipe', 'SL_RESPONSE_CHANNEL': '/tmp/hpe-swarm/demo.0.ce8c5e8ac844de71.response.pipe'}, 'working_dir': '/tmp/test', 'user': '0:0', 'dns': [], 'labels': None}
+2023-09-29 14:12:48,307 : swarm.swop : INFO : SWOPRunTask: USER Image Name : user-env-tf2.7.0-swop
+2023-09-29 14:12:52,234 : swarm.swop : INFO : SWOPRunTask: Started containers successfully
+2023-09-29 14:16:36,186 : swarm.swop : WARNING : [93mSWOPExecutor: TASKRUNNER WAS RESET[0m
+2023-09-29 14:16:36,186 : swarm.swop : INFO : SWOPRunTask: Stopping Task
+2023-09-29 14:16:36,188 : swarm.swop : INFO : SWOPExecutor: Total Tasks: 2 , Current Task : None , opId : None Done
+2023-09-29 14:16:36,188 : swarm.swop : INFO : SWOPExecutor : Ready for Task Execution!

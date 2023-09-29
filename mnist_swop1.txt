@@ -1,0 +1,236 @@
+addgroup: The GID `0' is already in use.
+Adding group `docker' (GID 999) ...
+Done.
+adduser: The UID 0 is already in use.
+uid=0(root) gid=0(root) groups=0(root),999(docker)
+######################################################################
+##                   HPE SWARM LEARNING SWOP NODE                   ##
+######################################################################
+## © Copyright 2021-2023 Hewlett Packard Enterprise Development LP  ##
+######################################################################
+=========              EXECUTING AS USER : root              =========
+2023-09-29 14:04:33,581 : swarm.swop : INFO : Creating Autopass License Provider
+2023-09-29 14:04:34,682 : swarm.swop : INFO : Creating license server
+2023-09-29 14:04:34,682 : swarm.swop : INFO : Setting license servers
+2023-09-29 14:04:34,696 : swarm.swop : INFO : Acquiring floating license 1100000390:1
+2023-09-29 14:04:35,477 : swarm.swop : INFO :  Found Profile at : /platform/swarm/usr/swop1_profile.yaml 
+2023-09-29 14:04:35,485 : swarm.swop : INFO : SWOP Profile 
+============================================================
+apisrv:
+  locator:
+    host: 192.168.120.235
+    port: 30304
+    service: null
+apls:
+  locator:
+    host: 172.30.31.2
+    port: 5814
+envvars:
+- SL_LOG_LEVEL: INFO
+- http_proxy: null
+- https_proxy: null
+- no_proxy: null
+- HTTP_PROXY: null
+- HTTPS_PROXY: null
+- NO_PROXY: null
+groupname: demo
+network: host-1-net
+nodes:
+- slnodedef:
+    identity:
+    - attribute:
+        aType: KEY
+        mType: BIND
+        src: /opt/hpe/swarm-learning/workspace/mnist/cert/sl-1-key.pem
+        subPath: null
+        tgt: /swarm-cert/sl-1-key.pem
+    - attribute:
+        aType: CERT
+        mType: BIND
+        src: /opt/hpe/swarm-learning/workspace/mnist/cert/sl-1-cert.pem
+        subPath: null
+        tgt: /swarm-cert/sl-1-cert.pem
+    - attribute:
+        aType: CAPATH
+        mType: BIND
+        src: /opt/hpe/swarm-learning/workspace/mnist/cert/ca/capath
+        subPath: null
+        tgt: /swarm-cert/capath
+    idx: 0
+    privatedata:
+      mType: BIND
+      src: /opt/hpe/swarm-learning/workspace/mnist/app-data
+    slenvvars: null
+    slhostip: 192.168.120.235
+    slhostname: sl1
+    slport: 16000
+    usrenvvars:
+    - SCRATCH_DIR: user1
+    usrhostname: user1
+policyuri: null
+resourcemgr:
+  accessinfo:
+    accesstype: FROMENV
+  mgrtype: DOCKER
+taskrunner: defaulttaskbb.taskdb.sml.hpe
+
+============================================================
+
+2023-09-29 14:04:35,591 : swarm.swop : INFO : SL Nodes validation is started
+2023-09-29 14:04:35,592 : swarm.swop : INFO : Attempting to contact API-Server at : 192.168.120.235:30304
+2023-09-29 14:04:35,678 : swarm.swop : INFO : API-Server is UP!
+2023-09-29 14:04:35,687 : swarm.swop : INFO : SWOPCtx : 
+============================================================
+===== NODE UID :  46936662-aa59-4707-a54e-cef75d9f84cf =====
+============================================================
+
+/usr/lib/python3.8/site-packages/urllib3/connection.py:460: SubjectAltNameWarning: Certificate for 192.168.120.235 has no `subjectAltName`, falling back to check for a `commonName` for now. This feature is being removed by major browsers and deprecated by RFC 2818. (See https://github.com/urllib3/urllib3/issues/497 for details.)
+  warnings.warn(
+2023-09-29 14:04:41,881 : swarm.swop : INFO : SWOPExecutor : Ready for Task Execution!
+2023-09-29 14:08:00,549 : swarm.swop : INFO : SWOPExecutor: ENROLL TO Task : user_env_tf_build_task , opId : 12210008173649295504 - Begins
+2023-09-29 14:08:03,591 : swarm.swop : INFO : SWOPExecutor: ENROLL TO Task : user_env_tf_build_task , opId : 12210008173649295504 - Ends
+2023-09-29 14:08:12,657 : swarm.swop : INFO : SWOPBuildTask: Validating profile
+2023-09-29 14:08:18,851 : swarm.swop : INFO : Extracted container id and image info from /tmp/container_info_file file
+2023-09-29 14:08:31,624 : swarm.swop : INFO : SWOPBuildTask: prerequisites OK
+2023-09-29 14:08:34,657 : swarm.swop : INFO : SWOPBuildTask: start build thread 
+
+2023-09-29 14:08:34,691 : swarm.swop : INFO : Step 1/5 : FROM tensorflow/tensorflow:2.7.0
+2023-09-29 14:08:34,692 : swarm.swop : INFO :  ---> b51f642475ab
+2023-09-29 14:08:34,692 : swarm.swop : INFO : Step 2/5 : RUN pip3 install --upgrade pip && pip3 install keras matplotlib opencv-python pandas protobuf==3.15.6
+2023-09-29 14:08:34,758 : swarm.swop : INFO :  ---> Running in 7631c030182a
+2023-09-29 14:08:36,101 : swarm.swop : INFO : Collecting pip
+2023-09-29 14:08:36,378 : swarm.swop : INFO :   Downloading pip-23.2.1-py3-none-any.whl (2.1 MB)
+2023-09-29 14:08:36,895 : swarm.swop : INFO : Installing collected packages: pip
+  Attempting uninstall: pip
+2023-09-29 14:08:36,896 : swarm.swop : INFO :     Found existing installation: pip 20.2.4
+2023-09-29 14:08:37,108 : swarm.swop : INFO :     Uninstalling pip-20.2.4:
+2023-09-29 14:08:37,331 : swarm.swop : INFO :       Successfully uninstalled pip-20.2.4
+2023-09-29 14:08:39,002 : swarm.swop : INFO : Successfully installed pip-23.2.1
+2023-09-29 14:08:40,135 : swarm.swop : INFO : Requirement already satisfied: keras in /usr/local/lib/python3.8/dist-packages (2.7.0)
+2023-09-29 14:08:40,885 : swarm.swop : INFO : Collecting matplotlib
+2023-09-29 14:08:40,886 : swarm.swop : INFO :   Obtaining dependency information for matplotlib from https://files.pythonhosted.org/packages/08/73/a4af3493a81d6e5e1fdb4c72f4d3573a7e94b60f7c2c69ab0275fdc7cd8e/matplotlib-3.7.3-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata
+2023-09-29 14:08:41,141 : swarm.swop : INFO :   Downloading matplotlib-3.7.3-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata (5.7 kB)
+2023-09-29 14:08:41,553 : swarm.swop : INFO : Collecting opencv-python
+2023-09-29 14:08:41,554 : swarm.swop : INFO :   Obtaining dependency information for opencv-python from https://files.pythonhosted.org/packages/b7/8a/b2f7e1a434d56bf1d7570fc5941ace0847404e1032d7f1f0b8fed896568d/opencv_python-4.8.1.78-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata
+2023-09-29 14:08:41,607 : swarm.swop : INFO :   Downloading opencv_python-4.8.1.78-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (19 kB)
+2023-09-29 14:08:42,087 : swarm.swop : INFO : Collecting pandas
+2023-09-29 14:08:42,089 : swarm.swop : INFO :   Obtaining dependency information for pandas from https://files.pythonhosted.org/packages/f8/7f/5b047effafbdd34e52c9e2d7e44f729a0655efafb22198c45cf692cdc157/pandas-2.0.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata
+2023-09-29 14:08:42,137 : swarm.swop : INFO :   Downloading pandas-2.0.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (18 kB)
+2023-09-29 14:08:42,789 : swarm.swop : INFO : Collecting protobuf==3.15.6
+2023-09-29 14:08:42,854 : swarm.swop : INFO :   Downloading protobuf-3.15.6-cp38-cp38-manylinux1_x86_64.whl (1.0 MB)
+2023-09-29 14:08:43,478 : swarm.swop : INFO :      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 1.7 MB/s eta 0:00:00
+2023-09-29 14:08:43,488 : swarm.swop : INFO : Requirement already satisfied: six>=1.9 in /usr/local/lib/python3.8/dist-packages (from protobuf==3.15.6) (1.16.0)
+2023-09-29 14:08:43,749 : swarm.swop : INFO : Collecting contourpy>=1.0.1 (from matplotlib)
+2023-09-29 14:08:43,750 : swarm.swop : INFO :   Obtaining dependency information for contourpy>=1.0.1 from https://files.pythonhosted.org/packages/8e/71/7f20855592cc929bc206810432b991ec4c702dc26b0567b132e52c85536f/contourpy-1.1.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata
+2023-09-29 14:08:43,805 : swarm.swop : INFO :   Downloading contourpy-1.1.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.9 kB)
+2023-09-29 14:08:43,889 : swarm.swop : INFO : Collecting cycler>=0.10 (from matplotlib)
+2023-09-29 14:08:43,890 : swarm.swop : INFO :   Obtaining dependency information for cycler>=0.10 from https://files.pythonhosted.org/packages/2b/b3/70c33027c4918c10ccf176014b38f8b91cb18ac018a78854543a4fc72609/cycler-0.12.0-py3-none-any.whl.metadata
+2023-09-29 14:08:43,941 : swarm.swop : INFO :   Downloading cycler-0.12.0-py3-none-any.whl.metadata (3.8 kB)
+2023-09-29 14:08:44,193 : swarm.swop : INFO : Collecting fonttools>=4.22.0 (from matplotlib)
+2023-09-29 14:08:44,194 : swarm.swop : INFO :   Obtaining dependency information for fonttools>=4.22.0 from https://files.pythonhosted.org/packages/67/56/ac87cb80849d4a99ec6ea4e1d10508871d300e2960bea3e2b8af809a6125/fonttools-4.43.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata
+2023-09-29 14:08:44,270 : swarm.swop : INFO :   Downloading fonttools-4.43.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (151 kB)
+2023-09-29 14:08:44,378 : swarm.swop : INFO :      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 151.9/151.9 kB 1.5 MB/s eta 0:00:00
+2023-09-29 14:08:44,628 : swarm.swop : INFO : Collecting kiwisolver>=1.0.1 (from matplotlib)
+2023-09-29 14:08:44,629 : swarm.swop : INFO :   Obtaining dependency information for kiwisolver>=1.0.1 from https://files.pythonhosted.org/packages/d2/55/7021ffcc8cb26a520bb051aa0a3d08daf200cde945e5863d5768161e2d3d/kiwisolver-1.4.5-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl.metadata
+2023-09-29 14:08:44,695 : swarm.swop : INFO :   Downloading kiwisolver-1.4.5-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl.metadata (6.4 kB)
+2023-09-29 14:08:44,707 : swarm.swop : INFO : Requirement already satisfied: numpy<2,>=1.20 in /usr/local/lib/python3.8/dist-packages (from matplotlib) (1.21.3)
+2023-09-29 14:08:44,813 : swarm.swop : INFO : Collecting packaging>=20.0 (from matplotlib)
+2023-09-29 14:08:44,866 : swarm.swop : INFO :   Downloading packaging-23.1-py3-none-any.whl (48 kB)
+2023-09-29 14:08:44,897 : swarm.swop : INFO :      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.9/48.9 kB 1.7 MB/s eta 0:00:00
+2023-09-29 14:08:45,630 : swarm.swop : INFO : Collecting pillow>=6.2.0 (from matplotlib)
+2023-09-29 14:08:45,631 : swarm.swop : INFO :   Obtaining dependency information for pillow>=6.2.0 from https://files.pythonhosted.org/packages/cd/6d/07566c00ddb116a0eca1a623abda12da81099a6ff3200e5e6b7e2d3c8c2b/Pillow-10.0.1-cp38-cp38-manylinux_2_28_x86_64.whl.metadata
+2023-09-29 14:08:45,695 : swarm.swop : INFO :   Downloading Pillow-10.0.1-cp38-cp38-manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+2023-09-29 14:08:45,942 : swarm.swop : INFO : Collecting pyparsing>=2.3.1 (from matplotlib)
+2023-09-29 14:08:45,943 : swarm.swop : INFO :   Obtaining dependency information for pyparsing>=2.3.1 from https://files.pythonhosted.org/packages/39/92/8486ede85fcc088f1b3dba4ce92dd29d126fd96b0008ea213167940a2475/pyparsing-3.1.1-py3-none-any.whl.metadata
+2023-09-29 14:08:46,014 : swarm.swop : INFO :   Downloading pyparsing-3.1.1-py3-none-any.whl.metadata (5.1 kB)
+2023-09-29 14:08:46,127 : swarm.swop : INFO : Collecting python-dateutil>=2.7 (from matplotlib)
+2023-09-29 14:08:46,177 : swarm.swop : INFO :   Downloading python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
+2023-09-29 14:08:46,387 : swarm.swop : INFO :      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 247.7/247.7 kB 1.2 MB/s eta 0:00:00
+2023-09-29 14:08:46,533 : swarm.swop : INFO : Collecting importlib-resources>=3.2.0 (from matplotlib)
+2023-09-29 14:08:46,534 : swarm.swop : INFO :   Obtaining dependency information for importlib-resources>=3.2.0 from https://files.pythonhosted.org/packages/65/6e/09d8816b5cb7a4006ef8ad1717a2703ad9f331dae9717d9f22488a2d6469/importlib_resources-6.1.0-py3-none-any.whl.metadata
+2023-09-29 14:08:46,583 : swarm.swop : INFO :   Downloading importlib_resources-6.1.0-py3-none-any.whl.metadata (4.1 kB)
+2023-09-29 14:08:46,966 : swarm.swop : INFO : Collecting pytz>=2020.1 (from pandas)
+2023-09-29 14:08:46,967 : swarm.swop : INFO :   Obtaining dependency information for pytz>=2020.1 from https://files.pythonhosted.org/packages/32/4d/aaf7eff5deb402fd9a24a1449a8119f00d74ae9c2efa79f8ef9994261fc2/pytz-2023.3.post1-py2.py3-none-any.whl.metadata
+2023-09-29 14:08:47,025 : swarm.swop : INFO :   Downloading pytz-2023.3.post1-py2.py3-none-any.whl.metadata (22 kB)
+2023-09-29 14:08:47,148 : swarm.swop : INFO : Collecting tzdata>=2022.1 (from pandas)
+2023-09-29 14:08:47,210 : swarm.swop : INFO :   Downloading tzdata-2023.3-py2.py3-none-any.whl (341 kB)
+2023-09-29 14:08:47,503 : swarm.swop : INFO :      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 341.8/341.8 kB 1.2 MB/s eta 0:00:00
+2023-09-29 14:08:47,783 : swarm.swop : INFO : Collecting zipp>=3.1.0 (from importlib-resources>=3.2.0->matplotlib)
+2023-09-29 14:08:47,784 : swarm.swop : INFO :   Obtaining dependency information for zipp>=3.1.0 from https://files.pythonhosted.org/packages/d9/66/48866fc6b158c81cc2bfecc04c480f105c6040e8b077bc54c634b4a67926/zipp-3.17.0-py3-none-any.whl.metadata
+2023-09-29 14:08:47,850 : swarm.swop : INFO :   Downloading zipp-3.17.0-py3-none-any.whl.metadata (3.7 kB)
+2023-09-29 14:08:48,060 : swarm.swop : INFO : Downloading matplotlib-3.7.3-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (9.2 MB)
+2023-09-29 14:08:53,292 : swarm.swop : INFO :    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.2/9.2 MB 1.8 MB/s eta 0:00:00
+2023-09-29 14:08:53,352 : swarm.swop : INFO : Downloading opencv_python-4.8.1.78-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (61.7 MB)
+2023-09-29 14:10:33,839 : swarm.swop : INFO :    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.7/61.7 MB 626.2 kB/s eta 0:00:00
+2023-09-29 14:10:33,895 : swarm.swop : INFO : Downloading pandas-2.0.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.4 MB)
+2023-09-29 14:10:59,592 : swarm.swop : INFO :    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.4/12.4 MB 457.8 kB/s eta 0:00:00
+2023-09-29 14:10:59,651 : swarm.swop : INFO : Downloading contourpy-1.1.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (301 kB)
+2023-09-29 14:11:00,762 : swarm.swop : INFO :    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 301.1/301.1 kB 273.1 kB/s eta 0:00:00
+2023-09-29 14:11:00,842 : swarm.swop : INFO : Downloading cycler-0.12.0-py3-none-any.whl (8.2 kB)
+2023-09-29 14:11:00,934 : swarm.swop : INFO : Downloading fonttools-4.43.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.6 MB)
+2023-09-29 14:11:20,482 : swarm.swop : INFO :    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.6/4.6 MB 235.9 kB/s eta 0:00:00
+2023-09-29 14:11:20,535 : swarm.swop : INFO : Downloading importlib_resources-6.1.0-py3-none-any.whl (33 kB)
+2023-09-29 14:11:20,685 : swarm.swop : INFO : Downloading kiwisolver-1.4.5-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl (1.2 MB)
+2023-09-29 14:11:24,264 : swarm.swop : INFO :    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 329.0 kB/s eta 0:00:00
+2023-09-29 14:11:24,336 : swarm.swop : INFO : Downloading Pillow-10.0.1-cp38-cp38-manylinux_2_28_x86_64.whl (3.6 MB)
+2023-09-29 14:11:32,188 : swarm.swop : INFO :    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.6/3.6 MB 461.5 kB/s eta 0:00:00
+2023-09-29 14:11:32,248 : swarm.swop : INFO : Downloading pyparsing-3.1.1-py3-none-any.whl (103 kB)
+2023-09-29 14:11:32,359 : swarm.swop : INFO :    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 103.1/103.1 kB 933.8 kB/s eta 0:00:00
+2023-09-29 14:11:32,416 : swarm.swop : INFO : Downloading pytz-2023.3.post1-py2.py3-none-any.whl (502 kB)
+2023-09-29 14:11:33,109 : swarm.swop : INFO :    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 502.5/502.5 kB 718.6 kB/s eta 0:00:00
+2023-09-29 14:11:33,162 : swarm.swop : INFO : Downloading zipp-3.17.0-py3-none-any.whl (7.4 kB)
+2023-09-29 14:11:34,167 : swarm.swop : INFO : Installing collected packages: pytz, zipp, tzdata, python-dateutil, pyparsing, protobuf, pillow, packaging, opencv-python, kiwisolver, fonttools, cycler, contourpy, pandas, importlib-resources, matplotlib
+2023-09-29 14:11:34,747 : swarm.swop : INFO :   Attempting uninstall: protobuf
+2023-09-29 14:11:34,748 : swarm.swop : INFO :     Found existing installation: protobuf 3.19.1
+2023-09-29 14:11:34,750 : swarm.swop : INFO :     Uninstalling protobuf-3.19.1:
+2023-09-29 14:11:35,075 : swarm.swop : INFO :       Successfully uninstalled protobuf-3.19.1
+2023-09-29 14:11:45,955 : swarm.swop : INFO : Successfully installed contourpy-1.1.1 cycler-0.12.0 fonttools-4.43.0 importlib-resources-6.1.0 kiwisolver-1.4.5 matplotlib-3.7.3 opencv-python-4.8.1.78 packaging-23.1 pandas-2.0.3 pillow-10.0.1 protobuf-3.15.6 pyparsing-3.1.1 python-dateutil-2.8.2 pytz-2023.3.post1 tzdata-2023.3 zipp-3.17.0
+2023-09-29 14:11:45,957 : swarm.swop : INFO : [91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv[0m
+2023-09-29 14:11:58,406 : swarm.swop : INFO : Removing intermediate container 7631c030182a
+2023-09-29 14:11:58,407 : swarm.swop : INFO :  ---> 4f35704581b4
+2023-09-29 14:11:58,416 : swarm.swop : INFO : Step 3/5 : RUN mkdir -p /tmp/hpe-swarmcli-pkg
+2023-09-29 14:11:58,552 : swarm.swop : INFO :  ---> Running in cd89f65b1e53
+2023-09-29 14:11:59,119 : swarm.swop : INFO : Removing intermediate container cd89f65b1e53
+2023-09-29 14:11:59,119 : swarm.swop : INFO :  ---> 0744b7845a57
+2023-09-29 14:11:59,120 : swarm.swop : INFO : Step 4/5 : COPY swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl /tmp/hpe-swarmcli-pkg/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl
+2023-09-29 14:11:59,167 : swarm.swop : INFO :  ---> b28178c074ab
+2023-09-29 14:11:59,168 : swarm.swop : INFO : Step 5/5 : RUN pip3 install /tmp/hpe-swarmcli-pkg/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl
+2023-09-29 14:11:59,205 : swarm.swop : INFO :  ---> Running in 80982d4a27a6
+2023-09-29 14:12:00,092 : swarm.swop : INFO : Processing /tmp/hpe-swarmcli-pkg/swarmlearning-client-py3-none-manylinux_2_24_x86_64.whl
+2023-09-29 14:12:00,837 : swarm.swop : INFO : Collecting networkx>=2.6 (from swarmlearning==client)
+2023-09-29 14:12:01,128 : swarm.swop : INFO :   Downloading networkx-3.1-py3-none-any.whl (2.1 MB)
+2023-09-29 14:12:01,499 : swarm.swop : INFO :      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 5.9 MB/s eta 0:00:00
+2023-09-29 14:12:01,525 : swarm.swop : INFO : Requirement already satisfied: numpy>=1.19 in /usr/local/lib/python3.8/dist-packages (from swarmlearning==client) (1.21.3)
+2023-09-29 14:12:01,526 : swarm.swop : INFO : Requirement already satisfied: protobuf<=3.20.1,>=3.15.6 in /usr/local/lib/python3.8/dist-packages (from swarmlearning==client) (3.15.6)
+2023-09-29 14:12:01,528 : swarm.swop : INFO : Requirement already satisfied: requests>=2.26 in /usr/local/lib/python3.8/dist-packages (from swarmlearning==client) (2.26.0)
+2023-09-29 14:12:01,561 : swarm.swop : INFO : Requirement already satisfied: six>=1.9 in /usr/local/lib/python3.8/dist-packages (from protobuf<=3.20.1,>=3.15.6->swarmlearning==client) (1.16.0)
+2023-09-29 14:12:01,581 : swarm.swop : INFO : Requirement already satisfied: urllib3<1.27,>=1.21.1 in /usr/local/lib/python3.8/dist-packages (from requests>=2.26->swarmlearning==client) (1.26.7)
+2023-09-29 14:12:01,583 : swarm.swop : INFO : Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.8/dist-packages (from requests>=2.26->swarmlearning==client) (2021.10.8)
+2023-09-29 14:12:01,585 : swarm.swop : INFO : Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/local/lib/python3.8/dist-packages (from requests>=2.26->swarmlearning==client) (2.0.7)
+2023-09-29 14:12:01,588 : swarm.swop : INFO : Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.8/dist-packages (from requests>=2.26->swarmlearning==client) (3.3)
+2023-09-29 14:12:02,132 : swarm.swop : INFO : Installing collected packages: networkx, swarmlearning
+2023-09-29 14:12:03,802 : swarm.swop : INFO : Successfully installed networkx-3.1 swarmlearning-2.0.0
+2023-09-29 14:12:03,803 : swarm.swop : INFO : [91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv[0m
+2023-09-29 14:12:05,707 : swarm.swop : INFO : Removing intermediate container 80982d4a27a6
+2023-09-29 14:12:05,708 : swarm.swop : INFO :  ---> a55e48547882
+2023-09-29 14:12:05,709 : swarm.swop : INFO : ID: sha256:a55e485478829f776148ed212bce4b36aaa1d830c3c47a1a1ef16979e3a0fbcb
+2023-09-29 14:12:05,709 : swarm.swop : INFO : Successfully built a55e48547882
+2023-09-29 14:12:05,726 : swarm.swop : INFO : Successfully tagged user-env-tf2.7.0-swop:latest
+2023-09-29 14:12:12,217 : swarm.swop : INFO : SWOPBuildTask: build task completed
+2023-09-29 14:12:12,217 : swarm.swop : INFO : SWOPBuildTask: Stopping Task
+2023-09-29 14:12:15,277 : swarm.swop : INFO : SWOPExecutor: Total Tasks: 1 , Current Task : user_env_tf_build_task , opId : 12210008173649295504 Done
+2023-09-29 14:12:15,277 : swarm.swop : INFO : SWOPExecutor : Ready for Task Execution!
+2023-09-29 14:12:43,603 : swarm.swop : INFO : SWOPExecutor: ENROLL TO Task : swarm_mnist_task , opId : 11745205044202366838 - Begins
+2023-09-29 14:12:46,668 : swarm.swop : INFO : SWOPExecutor: ENROLL TO Task : swarm_mnist_task , opId : 11745205044202366838 - Ends
+2023-09-29 14:12:46,786 : swarm.swop : INFO : Extracted container id and image info from /tmp/container_info_file file
+2023-09-29 14:12:46,832 : swarm.swop : INFO : SWOPRunTask: Profile validated
+2023-09-29 14:12:49,890 : swarm.swop : INFO : SWOPRunTask: APLS configured with non-default port : 5814
+2023-09-29 14:12:49,890 : swarm.swop : INFO : SWOPRunTask: SL Image Name : hub.myenterpriselicense.hpe.com/hpe/swarm-learning/sl:2.0.0
+2023-09-29 14:12:49,999 : swarm.swop : INFO : SWOPRunTask: Arguments passed to User container idx : 0
+2023-09-29 14:12:49,999 : swarm.swop : INFO : {'entrypoint': 'python3', 'detach': True, 'auto_remove': False, 'name': 'demo-swarm_mnist_task-u-0-4ceaf40b9b031e60', 'hostname': 'user1', 'network': 'host-1-net', 'ports': {}, 'mounts': [{'Target': '/tmp/hpe-swarm', 'Source': 'swop-demo-swif-0-4ceaf40b9b031e60', 'Type': 'volume', 'ReadOnly': False}, {'Target': '/tmp/test/model', 'Source': '/opt/hpe/swarm-learning/workspace/mnist/model', 'Type': 'bind', 'ReadOnly': False}, {'Target': '/tmp/test/', 'Source': '/opt/hpe/swarm-learning/workspace/mnist/app-data', 'Type': 'bind', 'ReadOnly': False}], 'environment': {'MODEL_DIR': 'model', 'MAX_EPOCHS': 2, 'MIN_PEERS': 2, 'SCRATCH_DIR': 'user1', 'SL_REQUEST_CHANNEL': '/tmp/hpe-swarm/demo.0.4ceaf40b9b031e60.request.pipe', 'SL_RESPONSE_CHANNEL': '/tmp/hpe-swarm/demo.0.4ceaf40b9b031e60.response.pipe'}, 'working_dir': '/tmp/test', 'user': '0:0', 'dns': [], 'labels': None}
+2023-09-29 14:12:49,999 : swarm.swop : INFO : SWOPRunTask: USER Image Name : user-env-tf2.7.0-swop
+2023-09-29 14:12:53,918 : swarm.swop : INFO : SWOPRunTask: Started containers successfully
+2023-09-29 14:16:37,769 : swarm.swop : WARNING : [93mSWOPExecutor: TASKRUNNER WAS RESET[0m
+2023-09-29 14:16:37,770 : swarm.swop : INFO : SWOPRunTask: Stopping Task
+2023-09-29 14:16:37,775 : swarm.swop : INFO : SWOPExecutor: Total Tasks: 2 , Current Task : None , opId : None Done
+2023-09-29 14:16:37,775 : swarm.swop : INFO : SWOPExecutor : Ready for Task Execution!
