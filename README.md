@@ -64,10 +64,12 @@ Mở port cho fw trên vm apls (centos):
 	firewall-cmd --reload
 Mở port cho fw trên vps: sudo ufw allow <port>
 
-APLS_IP=172.30.31.2 \
-SN_1_IP=192.168.120.235  \
-HOST_1_IP=192.168.120.235  \
-SN_API_PORT=30304 \
+APLS_IP=172.30.31.2
+SN_1_IP=192.168.120.235
+SN_2_IP=192.168.120.118
+HOST_1_IP=192.168.120.235
+HOST_2_IP=192.168.120.118
+SN_API_PORT=30304
 SN_P2P_PORT=30303
 
 mkdir workspace; cp -r examples/mnist workspace/; cp -r examples/utils/gen-cert workspace/mnist/
