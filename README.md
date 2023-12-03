@@ -143,3 +143,17 @@ sudo ./scripts/bin/run-swci --name=swci1 --network=host-1-net \
 
 You can monitor the containers with SLM-UI:
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/a8b916ff-c484-4db6-8cf4-f4edaa66661b)
+
+
+### Troubleshooting diary:
+
+#### 1. One VPS (pc1) cannot go to SLM-UI, the other (pc2) can:
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/a4cc92b0-d8e3-497c-9aa4-4c263766ef0d)
+
+I check "ip route" of both and see the last line different:
+
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/992f91f4-f2ae-4b9d-9800-48c8baa0d517)
+
+Then I delete that route and it work :))
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/92789f1a-f902-4dbb-b12d-77c43a482e29)
+
