@@ -5,9 +5,25 @@
 
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/8f843d02-1e2f-4729-ae51-a32d60effce4)
 
-
 Click "Copy CURL". Download apls.zip in CentOS vm. (currently version 7).
 
+## Install APLS in Ubuntu 20.04 LTS
+If you deal with this error:
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/47d10410-2856-4655-8fb8-c756b36fa61b)
+
+Then `sudo apt-get install openjdk-8-jre`. Then run again `sudo ./setup -i silient`. If install successfully, you will receive:
+
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/980c0527-3ccd-4619-b6b7-61d183ff44c8)
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/fb8788c6-933d-42ec-bdfd-1e1017c8cc9a)
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/d0dcc7e7-ab95-47f0-b771-f9cd3b0eea8d)
+
+
+Then go to the directory below and enter the command below:
+
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/3bc5e484-1699-451b-9337-1c91dea0f685)
+
+
+## Continue to the setup process
 Note down the lock code. Then go to HPE Software Center. Search for ai swarm-learning.
 
 Choose "Get license". Activate the key using the lock code (remember one lock code one account). Download all.
