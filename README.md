@@ -22,6 +22,9 @@ Then go to the directory below and enter the command below:
 
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/3bc5e484-1699-451b-9337-1c91dea0f685)
 
+Although status is "not running", but APLS is actually running:
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/bbf11f4f-e790-4daf-b6af-4e8936106029)
+
 
 ## Continue to the setup process
 Note down the lock code. Then go to HPE Software Center. Search for ai swarm-learning.
