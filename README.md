@@ -11,7 +11,7 @@ Click "Copy CURL". Download apls.zip in CentOS vm. (currently version 7).
 If you deal with this error:
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/47d10410-2856-4655-8fb8-c756b36fa61b)
 
-Then `sudo apt-get install openjdk-8-jre`. Then run again `sudo ./setup -i silient`. If install successfully, you will receive:
+Then `sudo apt-get install openjdk-8-jre` (remeember to sudo apt-get update & upgrade first). Then run again `sudo ./setup -i silient`. If install successfully, you will receive:
 
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/980c0527-3ccd-4619-b6b7-61d183ff44c8)
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/fb8788c6-933d-42ec-bdfd-1e1017c8cc9a)
