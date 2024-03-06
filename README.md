@@ -8,10 +8,11 @@
 Click "Copy CURL". Download apls.zip in CentOS vm. (currently version 7).
 
 ## Install APLS in Ubuntu 20.04 LTS
+Unzip with `unzip apls-file -d folder-extracted` command. If not have unzip yet, install it with `sudo apt-get install unzip`. Then `cd UNIX` and `chmod +x setup.bin`. Then run `sudo ./setup.bin`.
 If you deal with this error:
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/47d10410-2856-4655-8fb8-c756b36fa61b)
 
-Then `sudo apt-get install openjdk-8-jre` (remeember to sudo apt-get update & upgrade first). Then run again `sudo ./setup -i silient`. Keep entering for those phrases asking "Enter":
+Then `sudo apt-get install openjdk-8-jre` (remeember to sudo apt-get update & upgrade first). Then run again `sudo ./setup.bin -i silient`. Keep entering for those phrases asking "Enter":
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/192d3da4-cbca-4054-936f-b0ba133a041d)
 
 
