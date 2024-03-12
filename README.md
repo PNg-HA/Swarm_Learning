@@ -35,6 +35,7 @@ Although status is "not running", but APLS is actually running:
 Note down the lock code. Then go to HPE Software Center. Search for ai swarm-learning.
 
 Choose "Get license". Activate the key using the lock code (remember one lock code one account). Download all.
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/e7b82243-b8a8-46b0-b8e5-dea5e9f27256)
 
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/ecf44d44-0391-4246-932e-8cb58014e5bd)
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/2d27b542-dba4-4264-ae0c-e03d969125ba)
