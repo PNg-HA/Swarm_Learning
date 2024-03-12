@@ -41,15 +41,17 @@ Choose "Get license". Activate the key using the lock code (remember one lock co
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/2d27b542-dba4-4264-ae0c-e03d969125ba)
 
 In the apls browser, browse and choose .DAT file. 
-![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/c38d9d35-5d69-41de-9f79-fb0eabe893b3)
 
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/de8b641f-ea1e-4bab-b86e-13c38bd0d095)
+
+Choose all licenses and clicked Install.
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/c38d9d35-5d69-41de-9f79-fb0eabe893b3)
+
+The result:
+
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/8f498aff-c48b-4a1c-a276-adf918129f88)
 
-
-
-Choose all licenses and clicked download.
-
+/ Archived of old version
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/c01cfa89-03f0-4ed1-af76-9f8b1368da61)
 
 Now run the SLM_UI_installer (Linux or Windows, I choose Wins). It will open a web. The requirement:
