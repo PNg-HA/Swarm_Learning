@@ -44,6 +44,7 @@ In the apls browser, browse and choose .DAT file.
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/c38d9d35-5d69-41de-9f79-fb0eabe893b3)
 
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/de8b641f-ea1e-4bab-b86e-13c38bd0d095)
+![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/8f498aff-c48b-4a1c-a276-adf918129f88)
 
 
 
