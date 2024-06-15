@@ -70,7 +70,7 @@ The docker registry (using email activate the lock code):
 Now I install the SLM_UI in an Ubuntu Desktop 20.04 vm. First I have to install docker, make it run for normal user. Login docker hub from terminal.
 https://docs.docker.com/engine/install/ubuntu/
 https://docs.docker.com/engine/install/linux-postinstall/
-Then create folder /opt/hpe/swarm-learning with mkdir -p and give it write permission with chmod +w
+Then create folder /opt/hpe/swarm-learning with mkdir -p and give it write permission with `chmod +w`
 Then enable ssh: `sudo apt install openssh-server`, `sudo systemctl enable ssh`, `sudo ufw allow ssh`
 and configure for ssh for root for the Ubun vm following the link: https://linuxconfig.org/allow-ssh-root-login-on-ubuntu-20-04-focal-fossa-linux
 
