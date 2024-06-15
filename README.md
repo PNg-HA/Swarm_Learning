@@ -1,5 +1,9 @@
-# Instruction to setup an example in HPE Swarm Learning:
+# Instruction to setup an example in HPE Swarm Learning
+## Introduction
+This is my research in school (NCKH). HPE Swarm learning is a decentralized machine learning solution that uses edge computing and blockchain technology to enable peer-to-peer collaboration. Detail about swarm learning: https://github.com/HewlettPackard/swarm-learning
 
+## Setup
+### Download HPE APLS 
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/e8875386-aff7-4a75-9760-7e13cb3c38c8)
 
 
@@ -7,7 +11,7 @@
 
 Click "Copy CURL". Download apls.zip in CentOS vm. (currently version 7).
 
-## Install APLS in Ubuntu 20.04 LTS
+### Install APLS in Ubuntu 20.04 LTS
 Unzip with `unzip apls-file -d folder-extracted` command. If not have unzip yet, install it with `sudo apt-get install unzip`. Then `cd UNIX` and `chmod +x setup.bin`. Then run `sudo ./setup.bin`.
 If you deal with this error:
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/47d10410-2856-4655-8fb8-c756b36fa61b)
@@ -31,7 +35,7 @@ Although status is "not running", but APLS is actually running:
 ![image](https://github.com/PNg-HA/Swarm_Learning/assets/93396414/bbf11f4f-e790-4daf-b6af-4e8936106029)
 
 
-## Continue to the setup process
+### Continue to the setup process
 Note down the lock code. Then go to HPE Software Center. Search for ai swarm-learning.
 
 Choose "Get license". Activate the key using the lock code (remember one lock code one account). Download all.
